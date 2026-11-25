@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+- Keep local financial fixtures and read-only calculations in `src/services/plaidService.ts` behind `PlaidReadService`; this lets a future server-side Plaid adapter replace the demo without mixing bank data with presentation.
+- Sum financial values in integer cents and keep liquidity, liabilities, and available credit separate; this prevents rounding drift and counting borrowed money as cash.
+- Mount the local conversation workspace behind ClientOnly and derive active conversations from `/chat/$threadId`; this avoids hydration mismatches and keeps reloads and message history isolated per thread.
+- Use AI Elements for conversation, message rendering and the composer; the local deterministic response service is an explicit Stage 1 exception to model streaming, so no live AI or tool execution is implied.
